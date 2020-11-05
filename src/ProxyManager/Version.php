@@ -34,7 +34,11 @@ final class Version
      */
     public static function getVersion(): string
     {
-        return InstalledVersions::getPrettyVersion('ocramius/proxy-manager')
-            . '@' . InstalledVersions::getReference('ocramius/proxy-manager');
+        if (!class_exists(InstalledVersions::class)) {
+            return '1.99.99@alcaeus';
+        }
+
+        return InstalledVersions::getPrettyVersion('alcaeus/proxy-manager-lts')
+            . '@' . InstalledVersions::getReference('alcaeus/proxy-manager-lts');
     }
 }

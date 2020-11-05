@@ -48,6 +48,10 @@ abstract class IdentifierSuffixer
 
     private static function loadBaseHashSalt(): string
     {
+        if (!class_exists(InstalledVersions::class)) {
+            return self::class;
+        }
+
         return sha1(serialize(InstalledVersions::getRawData()));
     }
 }

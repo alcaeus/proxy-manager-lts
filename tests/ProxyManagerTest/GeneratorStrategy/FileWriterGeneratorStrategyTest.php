@@ -145,35 +145,4 @@ final class FileWriterGeneratorStrategyTest extends TestCase
         $this->expectException(FileNotWritableException::class);
         $generator->generate(new ClassGenerator($fqcn));
     }
-
-    public function testWhenFailingAllTemporaryFilesAreRemoved(): void
-    {
-        $tmpDirPath = $this->tempDir . '/' . uniqid('noTempFilesLeftBehind', true);
-
-        mkdir($tmpDirPath);
-
-        $locator   = $this->createMock(FileLocatorInterface::class);
-        $generator = new FileWriterGeneratorStrategy($locator);
-        $tmpFile   = $tmpDirPath . '/' . uniqid('FileWriterGeneratorStrategyFailedFileMoveTest', true) . '.php';
-        $namespace = 'Foo';
-        $className = UniqueIdentifierGenerator::getIdentifier('Bar');
-        $fqcn      = $namespace . '\\' . $className;
-
-        $locator
-            ->method('getProxyFileName')
-            ->with($fqcn)
-            ->willReturn($tmpFile);
-
-        mkdir($tmpFile);
-
-        try {
-            $generator->generate(new ClassGenerator($fqcn));
-
-            self::fail('An exception was supposed to be thrown');
-        } catch (FileNotWritableException $exception) {
-            rmdir($tmpFile);
-
-            self::assertEquals(['.', '..'], scandir($tmpDirPath, SCANDIR_SORT_ASCENDING));
-        }
-    }
 }
