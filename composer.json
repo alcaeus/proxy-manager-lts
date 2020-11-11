@@ -1,23 +1,35 @@
 {
-    "name":              "ocramius/proxy-manager",
+    "name":              "alcaeus/proxy-manager-lts",
     "description":       "A library providing utilities to generate, instantiate and generally operate with Object Proxies",
     "type":              "library",
     "license":           "MIT",
-    "homepage":          "https://github.com/Ocramius/ProxyManager",
+    "homepage":          "https://github.com/alcaeus/proxy-manager-lts/",
     "keywords":          [
         "proxy",
         "proxy pattern",
         "service proxies",
         "lazy loading",
-        "aop"
+        "aop",
+        "lts"
     ],
     "authors": [
         {
             "name":     "Marco Pivetta",
             "email":    "ocramius@gmail.com",
             "homepage": "http://ocramius.github.io/"
+        },
+        {
+            "name":     "Andreas Braun",
+            "email":    "alcaeus@alcaeus.org"
+        },
+        {
+            "name": "Nicolas Grekas",
+            "email": "p@tchwork.com"
         }
     ],
+    "replace": {
+        "ocramius/proxy-manager": "^2.1"
+    },
     "require": {
         "php":                       ">=7.1",
         "laminas/laminas-code":      "^3.4.1",
@@ -31,12 +43,6 @@
         "ext-phar":                     "*",
         "symfony/phpunit-bridge":       "^5.2"
     },
-    "suggest": {
-        "ocramius/generated-hydrator": "To have very fast object to array to object conversion for ghost objects",
-        "laminas/laminas-xmlrpc":      "To have the XmlRpc adapter (Remote Object feature)",
-        "laminas/laminas-json":        "To have the JsonRpc adapter (Remote Object feature)",
-        "laminas/laminas-soap":        "To have the Soap adapter (Remote Object feature)"
-    },
     "autoload": {
         "psr-4": {
             "ProxyManager\\": "src/ProxyManager"
@@ -44,16 +50,10 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "ProxyManagerBench\\": "tests/ProxyManagerBench",
             "ProxyManagerTest\\": "tests/ProxyManagerTest",
             "ProxyManagerTestAsset\\": "tests/ProxyManagerTestAsset",
             "Laminas\\Server\\": "tests/Stubbed/Laminas/Server"
         }
     },
-    "minimum-stability": "dev",
-    "extra": {
-        "branch-alias": {
-            "dev-master": "3.0.x-dev"
-        }
-    }
+    "minimum-stability": "dev"
 }
